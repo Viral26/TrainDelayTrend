@@ -1,0 +1,47 @@
+{% load static %}
+<html>
+    <head>
+        <title>Train Delay Trend | Delay Trend For a Station</title>
+        <link rel='icon' href="{% static 'logo.png' %}"></link>
+    </head>
+    <body>
+        <img src="{% static 'logo.png' %}"></img>
+        <a href="{% url 'full_status' %}">Full Status</a>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+                {% comment %} {{my_form.as_p}} {% endcomment %}
+                <label>Train No.</label>
+                <input type="text" list="train_no_dd" name="train_no" autocomplete="off" required>
+                <datalist id="train_no_dd">
+                    {% for i in train_no_dropdown %}
+                        <option>{{i}}</option>
+                    {% endfor %}
+                </datalist>
+                <br><br>
+
+                <label>Station Code</label>
+                <input type="text" list="station_dd" name="station_code" autocomplete="off" required>
+                <datalist id="station_dd">
+                    {% for i in station_dropdown %}
+                        <option value="{{i.0}}">{{i.1}}</option>
+                    {% endfor %}
+                </datalist>
+                <br><br>
+
+                <label>Time Span</label>
+                <input type='radio' name='span' checked value='1'>1W</input>
+                <input type='radio' name='span' value='2'>1M</input>
+                <input type='radio' name='span' value='3'>6M</input>
+                <input type='radio' name='span' value='4'>1Y</input>
+                <input type='submit' value='submit'></input><br>
+        </form>
+
+
+        {% if is_submit == True %}
+            <img src="{% static 'graph.png' %}">
+        {% else %}
+            {{show_error}}
+        {% endif %}
+    </body>
+</html>

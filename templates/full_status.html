@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+    <head>
+        <title>Train Delay Trend | Full Train Status</title>
+        <link rel='icon' href="{% static 'logo.png' %}"></link>
+    </head>
+    <body>
+        <img src="{% static 'logo.png' %}"></img>
+        <a href="/">Home</a>
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <label>Train No.</label>
+            <input type="text" list="train_no_dd" name='train_no' autocomplete="off" required>
+                <datalist id='train_no_dd'>
+                    {% for i in train_no_dropdown%}
+                        <option>{{i}}</option>
+                    {% endfor %}
+                </datalist>
+            </input>
+            <br>
+            <br>
+
+            <label>Start Date</label>
+            <input type="date" name='start_from_source' autocomplete="off" required></input>
+
+            <br><br>
+            <input type='submit' value='submit'></input><br>
+        </form>
+        {% if is_submit == True %}
+            <img src="{% static 'graph1.png' %}">
+        {% else %}
+            {{show_error}}
+        {% endif %}
+    </body>
+</html>
