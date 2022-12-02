@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8(_l_0gk9(hl^#h-@r$+z7es!0kojuyo2a+(+b_i(&v_1t7@#n'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'live_train_data',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'virals$260598',
+        'PASSWORD': '',
         'PORT': 3306
     }
 }

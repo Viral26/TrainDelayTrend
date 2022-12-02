@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .models import main,station_mapping
-from matplotlib import pyplot as plt
 from datetime import datetime
 
+from django.shortcuts import render
+from matplotlib import pyplot as plt
 
+from .models import main, station_mapping
 
 
 def train_no(request):
