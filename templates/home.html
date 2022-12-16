@@ -13,7 +13,7 @@
                 {% comment %} {{my_form.as_p}} {% endcomment %}
                 <label>Train No.</label>
                 <input type="text" list="train_no_dd" name="train_no" autocomplete="off" required>
-                <datalist id="train_no_dd">
+                <datalist id="train_no_dd" style="height:5.1em;overflow:hidden">
                     {% for i in train_no_dropdown %}
                         <option>{{i}}</option>
                     {% endfor %}

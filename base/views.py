@@ -5,7 +5,6 @@ from matplotlib import pyplot as plt
 
 from .models import main, station_mapping
 
-
 def train_no(request):
     train_no = ''
     station_code=''
@@ -52,9 +51,9 @@ def train_no(request):
             station_name = dbStationName[station_code] if station_code in dbStationName.keys() else station_code
 
             for row in required_records:
-                dates.append(row.date)
+                dates.append(datetime.fromtimestamp(row.date_epoch).strftime("%d-%m-%Y"))
                 delay = row.delay
-                delays.append(int(delay) if delay.isdigit() else -10)
+                delays.append(delay)
             
             # print(dates,delays)
             # ax = plt.axes()
@@ -118,10 +117,9 @@ def full_status(request):
     if request.method == 'POST':
         train_no = request.POST.get('train_no')
         start_date = request.POST.get('start_from_source')
-        start_date = datetime.strptime(start_date,'%Y-%m-%d')
-        start_date = datetime.strftime(start_date,'%d-%b-%Y')
+        start_date_epoch = datetime.strptime(start_date,'%Y-%m-%d').timestamp()
 
-        required_records = main.objects.filter(train_no=train_no,start_from_source=start_date)
+        required_records = main.objects.filter(train_no=train_no,start_from_source_epoch=int(start_date_epoch))
 
         if required_records:
             is_submit = True
@@ -131,14 +129,14 @@ def full_status(request):
             for row in required_records:
                 stations.append(row.station_code)
                 delay = row.delay
-                delays.append(int(delay) if delay.isdigit() else -10)
+                delays.append(delay)
                 
             plt.figure(figsize=(16,6.5))
             plt.plot(stations,delays)
             plt.xlabel('Stations')
             plt.ylabel('Delay (mins)')
             plt.xticks(rotation=90)
-            plt.title(f'Train Delay Trend for {train_no} started on {start_date}')
+            plt.title(f'Train Delay Trend for {train_no} started on {datetime.fromtimestamp(int(start_date_epoch)).strftime("%d-%m-%Y")}')
 
             plt.savefig('static/graph1.png')
             plt.cla()
