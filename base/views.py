@@ -3,7 +3,10 @@ from datetime import datetime
 from django.shortcuts import render
 from matplotlib import pyplot as plt
 
-from .models import main, station_mapping
+# from .models import main, station_mapping
+from . import models
+main = models.main
+station_mapping = models.station_mapping
 
 def train_no(request):
     train_no = ''
