@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'DelayAnalysis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'live_train_data',
-        'HOST': 'localhost',
+        'NAME': 'railway',
+        'HOST': 'containers-us-west-181.railway.app',
         'USER': 'root',
-        'PASSWORD': 'virals$260598',
-        'PORT': 3306
+        'PASSWORD': 'uwXOThigl6JPuGIOkP0l',
+        'PORT': 7062
     }
 }
 
