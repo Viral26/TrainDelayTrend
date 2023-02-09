@@ -124,29 +124,32 @@ def full_status(request):
 
         required_records = main.objects.filter(train_no=train_no,start_from_source_epoch=int(start_date_epoch))
 
-        if required_records:
-            is_submit = True
-            delays=[]
-            stations = []
+        try: 
+            if required_records:
+                is_submit = True
+                delays=[]
+                stations = []
 
-            for row in required_records:
-                stations.append(row.station_code)
-                delay = row.delay
-                delays.append(delay)
-                
-            plt.figure(figsize=(16,6.5))
-            plt.plot(stations,delays)
-            plt.xlabel('Stations')
-            plt.ylabel('Delay (mins)')
-            plt.xticks(rotation=90)
-            plt.title(f'Train Delay Trend for {train_no} started on {datetime.fromtimestamp(int(start_date_epoch)).strftime("%d-%m-%Y")}')
+                for row in required_records:
+                    stations.append(row.station_code)
+                    delay = row.delay
+                    delays.append(delay)
+                    
+                plt.figure(figsize=(16,6.5))
+                plt.plot(stations,delays)
+                plt.xlabel('Stations')
+                plt.ylabel('Delay (mins)')
+                plt.xticks(rotation=90)
+                plt.title(f'Train Delay Trend for {train_no} started on {datetime.fromtimestamp(int(start_date_epoch)).strftime("%d-%m-%Y")}')
 
-            plt.savefig('static/graph1.png')
-            plt.cla()
+                plt.savefig('static/graph1.png')
+                plt.cla()
 
-            context = {'is_submit':is_submit,'train_no_dropdown':[trainNo[0] for trainNo in dbTrainList]}
-        
-        else:
-            context={'show_error':'Train data does not exist.'}
+                context = {'is_submit':is_submit,'train_no_dropdown':[trainNo[0] for trainNo in dbTrainList]}
+            
+            else:
+                context={'show_error':'Train data does not exist.'}
+        except Exception as e:
+            print(e)
 
     return render(request,'full_status.html',context)
