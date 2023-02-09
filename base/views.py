@@ -120,7 +120,7 @@ def full_status(request):
     if request.method == 'POST':
         train_no = request.POST.get('train_no')
         start_date = request.POST.get('start_from_source')
-        start_date_epoch = datetime.strptime(start_date,'%Y-%m-%d').timestamp()-19800
+        start_date_epoch = int(datetime.strptime(start_date,'%Y-%m-%d').timestamp())-19800
 
         required_records = main.objects.filter(train_no=train_no,start_from_source_epoch=int(start_date_epoch))
 
