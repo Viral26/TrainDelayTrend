@@ -124,6 +124,9 @@ def full_status(request):
 
         required_records = main.objects.filter(train_no=train_no,start_from_source_epoch=int(start_date_epoch))
 
+        context = {'required_records: ', required_records}
+        return render(request, 'full_status.html', context)
+
         try: 
             if required_records:
                 is_submit = True
