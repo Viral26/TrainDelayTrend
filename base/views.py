@@ -124,8 +124,8 @@ def full_status(request):
 
         required_records = main.objects.filter(train_no=train_no,start_from_source_epoch=int(start_date_epoch))
 
-        context = {'required_records': [train_no, start_date, start_date_epoch, required_records]}
-        return render(request, 'full_status.html', context)
+#         context = {'required_records': [train_no, start_date, start_date_epoch, required_records]}
+#         return render(request, 'full_status.html', context)
 
         try: 
             if required_records:
